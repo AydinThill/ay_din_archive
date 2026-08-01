@@ -28,3 +28,4 @@ dist-studio
 *.njsproj
 *.sln
 *.sw?
+.vercel
