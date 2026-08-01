@@ -83,11 +83,16 @@ export const release = defineType({
     defineField({
       name: 'releaseAt',
       title: 'Release date and time',
-      description: 'Stored as an exact instant. Sanity displays it in your local timezone.',
+      description: 'Required only for Scheduled releases. Public releases appear immediately.',
       type: 'datetime',
       group: 'schedule',
       options: {dateFormat: 'YYYY-MM-DD', timeFormat: 'HH:mm', timeStep: 15},
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule.custom((value, context) =>
+          context.document?.visibility === 'scheduled' && !value
+            ? 'A release date and time is required when visibility is Scheduled.'
+            : true,
+        ),
     }),
     defineField({
       name: 'spotifyUrl',

@@ -1,13 +1,5 @@
 import type {Release} from '../types/content'
-
-const serviceNames: Record<string, string> = {
-  spotify: 'Spotify',
-  appleMusic: 'Apple Music',
-  bandcamp: 'Bandcamp',
-  soundcloud: 'SoundCloud',
-  deezer: 'Deezer',
-  tidal: 'Tidal',
-}
+import {PlatformSelector} from './PlatformSelector'
 
 const dateFormatter = new Intl.DateTimeFormat('en', {
   day: '2-digit',
@@ -57,9 +49,13 @@ export function ReleaseArchive({releases}: {releases: Release[]}) {
             <div className="release-information">
               <p className="release-meta">
                 <span>{formatReleaseType(release.releaseType)}</span>
-                <time dateTime={release.releaseAt}>
-                  {dateFormatter.format(new Date(release.releaseAt))}
-                </time>
+                {release.releaseAt ? (
+                  <time dateTime={release.releaseAt}>
+                    {dateFormatter.format(new Date(release.releaseAt))}
+                  </time>
+                ) : (
+                  <span>Public</span>
+                )}
               </p>
               <h3>{release.title}</h3>
               <p className="release-artist">{release.artist}</p>
@@ -67,18 +63,7 @@ export function ReleaseArchive({releases}: {releases: Release[]}) {
                 <p className="release-description">{release.description}</p>
               ) : null}
 
-              {release.streamingLinks?.length ? (
-                <div className="streaming-links" aria-label={`Listen to ${release.title}`}>
-                  {release.streamingLinks.map((link) => (
-                    <a href={link.url} key={link.service} target="_blank" rel="noreferrer">
-                      <span>{serviceNames[link.service] || link.service}</span>
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                  ))}
-                </div>
-              ) : (
-                <p className="links-pending">Links forthcoming</p>
-              )}
+              <PlatformSelector release={release} />
             </div>
           </article>
         ))}

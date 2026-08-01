@@ -11,7 +11,7 @@ export type Release = {
   title: string
   artist: string
   releaseType: 'single' | 'ep' | 'album'
-  releaseAt: string
+  releaseAt?: string
   slug: string
   coverUrl?: string
   description?: string
