@@ -239,6 +239,32 @@
   margin-top: 2.5rem;
 }
 
+.platform-context {
+  margin-bottom: 1.25rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid #d8ff65;
+}
+
+.platform-context p,
+.platform-context span {
+  margin: 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.platform-context p {
+  color: #f5f5f1;
+  font-weight: 650;
+}
+
+.platform-context span {
+  margin-top: 0.35rem;
+  display: block;
+  color: #898b91;
+  line-height: 1.5;
+}
+
 .platform-logos {
   display: flex;
   align-items: center;
@@ -257,6 +283,9 @@
   color: #73767d;
   background: #0c0d10;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
   transition:
     color 220ms ease,
     border-color 220ms ease,
@@ -430,6 +459,17 @@
 
 .score-track .positive {
   background: #d8ff65;
+}
+
+.score-disclaimer {
+  margin: 1.2rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  color: #777a81;
+  font-size: 0.62rem;
+  letter-spacing: 0.055em;
+  line-height: 1.55;
+  text-transform: uppercase;
 }
 
 .platform-open {

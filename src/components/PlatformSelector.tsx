@@ -52,15 +52,16 @@ const platforms: Platform[] = [
 ]
 
 const scoreLabels: Record<ScoreKey, string> = {
-  popularity: 'Popularity',
-  ux: 'UX',
-  morality: 'Morality',
+  popularity: 'Service reach',
+  ux: 'App experience',
+  morality: 'Artist fairness',
 }
 
 function interpolateScore(key: ScoreKey, position: number) {
-  const lowerIndex = Math.floor(position)
-  const upperIndex = Math.min(Math.ceil(position), platforms.length - 1)
-  const progress = position - lowerIndex
+  const safePosition = Math.max(0, Math.min(platforms.length - 1, position))
+  const lowerIndex = Math.floor(safePosition)
+  const upperIndex = Math.min(Math.ceil(safePosition), platforms.length - 1)
+  const progress = safePosition - lowerIndex
   const lower = platforms[lowerIndex].scores[key]
   const upper = platforms[upperIndex].scores[key]
 
@@ -86,20 +87,24 @@ export function PlatformSelector({release}: {release: Release}) {
   const [position, setPosition] = useState(firstAvailableIndex)
   const positionRef = useRef(firstAvailableIndex)
   const animationFrame = useRef<number | null>(null)
-  const selectedIndex = Math.round(position)
+  const selectedIndex = Math.max(0, Math.min(platforms.length - 1, Math.round(position)))
   const selectedPlatform = platforms[selectedIndex]
   const selectedUrl = links[selectedPlatform.service]
 
   function updatePosition(nextPosition: number) {
-    positionRef.current = nextPosition
-    setPosition(nextPosition)
+    const safePosition = Number.isFinite(nextPosition)
+      ? Math.max(0, Math.min(platforms.length - 1, nextPosition))
+      : 0
+    positionRef.current = safePosition
+    setPosition(safePosition)
   }
 
   function moveTo(targetPosition: number) {
     if (animationFrame.current !== null) cancelAnimationFrame(animationFrame.current)
+    const safeTarget = Math.max(0, Math.min(platforms.length - 1, targetPosition))
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      updatePosition(targetPosition)
+      updatePosition(safeTarget)
       return
     }
 
@@ -108,11 +113,15 @@ export function PlatformSelector({release}: {release: Release}) {
     const duration = 420
 
     function animate(now: number) {
-      const elapsed = Math.min((now - startedAt) / duration, 1)
+      const elapsed = Math.max(0, Math.min((now - startedAt) / duration, 1))
       const eased = 1 - Math.pow(1 - elapsed, 3)
-      updatePosition(startPosition + (targetPosition - startPosition) * eased)
+      updatePosition(startPosition + (safeTarget - startPosition) * eased)
 
-      if (elapsed < 1) animationFrame.current = requestAnimationFrame(animate)
+      if (elapsed < 1) {
+        animationFrame.current = requestAnimationFrame(animate)
+      } else {
+        animationFrame.current = null
+      }
     }
 
     animationFrame.current = requestAnimationFrame(animate)
@@ -127,6 +136,11 @@ export function PlatformSelector({release}: {release: Release}) {
 
   return (
     <div className="platform-selector">
+      <div className="platform-context">
+        <p>Listening service guide</p>
+        <span>Compare the platforms themselves—not this release’s performance.</span>
+      </div>
+
       <div className="platform-logos" role="group" aria-label="Choose a streaming platform">
         {platforms.map((platform, index) => {
           const Icon = platform.icon
@@ -137,7 +151,12 @@ export function PlatformSelector({release}: {release: Release}) {
               className={index === selectedIndex ? 'platform-logo is-active' : 'platform-logo'}
               type="button"
               key={platform.service}
-              onClick={() => moveTo(index)}
+              onClick={(event) => {
+                event.preventDefault()
+                event.stopPropagation()
+                moveTo(index)
+              }}
+              onDragStart={(event) => event.preventDefault()}
               aria-label={`${platform.name}${isAvailable ? '' : ' — link unavailable'}`}
               aria-pressed={index === selectedIndex}
             >
@@ -175,10 +194,10 @@ export function PlatformSelector({release}: {release: Release}) {
       <div className="platform-readout">
         <div className="platform-readout-heading">
           <div>
-            <p>Selected platform</p>
+            <p>General service profile</p>
             <h4>{selectedPlatform.name}</h4>
           </div>
-          <span>Subjective Ay Din index</span>
+          <span>Ay Din editorial rating</span>
         </div>
 
         <dl className="platform-scores">
@@ -199,6 +218,11 @@ export function PlatformSelector({release}: {release: Release}) {
             )
           })}
         </dl>
+
+        <p className="score-disclaimer">
+          About {selectedPlatform.name} as a platform. Not plays, listener data or analytics for{' '}
+          {release.title}.
+        </p>
 
         {selectedUrl ? (
           <a className="platform-open" href={selectedUrl} target="_blank" rel="noreferrer">
