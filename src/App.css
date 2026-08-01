@@ -417,7 +417,7 @@
 .platform-scores {
   margin: 1.35rem 0 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
 }
 
@@ -537,6 +537,7 @@ a.platform-open:focus-visible {
   }
 
   .platform-scores {
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.65rem;
   }
 }

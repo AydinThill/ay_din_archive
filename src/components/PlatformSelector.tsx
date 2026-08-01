@@ -3,7 +3,7 @@ import type {IconType} from 'react-icons'
 import {SiApplemusic, SiBandcamp, SiDeezer, SiSoundcloud, SiSpotify, SiTidal} from 'react-icons/si'
 import type {Release} from '../types/content'
 
-type ScoreKey = 'popularity' | 'ux' | 'morality'
+type ScoreKey = 'popularity' | 'ux' | 'morality' | 'companyEthics'
 
 type Platform = {
   service: string
@@ -17,37 +17,37 @@ const platforms: Platform[] = [
     service: 'spotify',
     name: 'Spotify',
     icon: SiSpotify,
-    scores: {popularity: 96, ux: 88, morality: 18},
+    scores: {popularity: 96, ux: 88, morality: 18, companyEthics: 12},
   },
   {
     service: 'appleMusic',
     name: 'Apple Music',
     icon: SiApplemusic,
-    scores: {popularity: 86, ux: 89, morality: 55},
+    scores: {popularity: 86, ux: 89, morality: 55, companyEthics: 45},
   },
   {
     service: 'bandcamp',
     name: 'Bandcamp',
     icon: SiBandcamp,
-    scores: {popularity: 52, ux: 73, morality: 94},
+    scores: {popularity: 52, ux: 73, morality: 94, companyEthics: 68},
   },
   {
     service: 'soundcloud',
     name: 'SoundCloud',
     icon: SiSoundcloud,
-    scores: {popularity: 73, ux: 70, morality: 58},
+    scores: {popularity: 73, ux: 70, morality: 58, companyEthics: 50},
   },
   {
     service: 'deezer',
     name: 'Deezer',
     icon: SiDeezer,
-    scores: {popularity: 49, ux: 77, morality: 65},
+    scores: {popularity: 49, ux: 77, morality: 65, companyEthics: 64},
   },
   {
     service: 'tidal',
     name: 'Tidal',
     icon: SiTidal,
-    scores: {popularity: 45, ux: 82, morality: 76},
+    scores: {popularity: 45, ux: 82, morality: 76, companyEthics: 72},
   },
 ]
 
@@ -55,6 +55,7 @@ const scoreLabels: Record<ScoreKey, string> = {
   popularity: 'Network reach',
   ux: 'Interface',
   morality: 'Artist treatment',
+  companyEthics: 'Company ethics',
 }
 
 function interpolateScore(key: ScoreKey, position: number) {
