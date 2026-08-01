@@ -69,9 +69,27 @@ npm run format:check
 ## Hosting under a subpath
 
 The generated frontend is ready to be served from `/linktree/`, including its JavaScript
-and CSS asset URLs. The host for the main `aydin.quest` website must route requests for
-`/linktree/*` to this project's built `index.html`. The exact rewrite belongs in the hosting
-configuration once the provider for the main website is chosen.
+and CSS asset URLs. `vercel.json` maps those public URLs to the files in Vite's `dist`
+directory and sends application routes to `index.html`.
+
+### Initial Vercel setup
+
+1. Push this repository to GitHub, GitLab, or Bitbucket.
+2. In Vercel, choose **Add New → Project**, import the repository, and keep the detected
+   **Vite** framework settings. The build and output settings are already versioned in
+   `vercel.json`.
+3. Add the Sanity variables from `.env.example` under **Project → Settings → Environment
+   Variables** when the CMS project exists. `VITE_BASE_PATH=/linktree/` is already supplied
+   by `.env.production`.
+4. Deploy once and test the generated `*.vercel.app/linktree/` URL.
+5. Under **Project → Settings → Domains**, add `aydin.quest` and optionally
+   `www.aydin.quest`.
+6. At the domain registrar, create the exact DNS records Vercel shows. For an apex domain,
+   this is normally an A record; `www` normally uses a CNAME. Prefer the values displayed
+   by Vercel for this project over copied generic values.
+
+The root `/` redirect to `/linktree/` is intentionally temporary. Remove the first entry
+under `redirects` in `vercel.json` when the main `aydin.quest` homepage is ready.
 
 ## Suggested next phase
 
