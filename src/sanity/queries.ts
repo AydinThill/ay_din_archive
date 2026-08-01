@@ -21,7 +21,6 @@ export const homeQuery = `{
       {"service": "soundcloud", "url": soundcloudUrl},
       {"service": "deezer", "url": deezerUrl},
       {"service": "tidal", "url": tidalUrl}
-    ][defined(url)],
-    tracks[]->{_id, title, version, durationSeconds, "audioUrl": audio.asset->url}
+    ][defined(url)]
   }
 }`

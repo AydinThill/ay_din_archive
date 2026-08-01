@@ -1,4 +1,4 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const release = defineType({
   name: 'release',
@@ -56,15 +56,6 @@ export const release = defineType({
       options: {hotspot: true},
       fields: [defineField({name: 'alt', title: 'Alternative text', type: 'string'})],
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'tracks',
-      title: 'Tracks',
-      description: 'Drag to set the running order.',
-      type: 'array',
-      group: 'content',
-      of: [defineArrayMember({type: 'reference', to: [{type: 'track'}]})],
-      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: 'description',

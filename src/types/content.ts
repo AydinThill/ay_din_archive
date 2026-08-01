@@ -6,14 +6,6 @@ export type LinkItem = {
   accent?: string
 }
 
-export type Track = {
-  _id: string
-  title: string
-  version?: string
-  durationSeconds?: number
-  audioUrl?: string
-}
-
 export type Release = {
   _id: string
   title: string
@@ -23,7 +15,6 @@ export type Release = {
   slug: string
   coverUrl?: string
   description?: string
-  tracks: Track[]
   streamingLinks?: {service: string; url: string}[]
 }
 

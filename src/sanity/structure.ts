@@ -69,7 +69,6 @@ export const structure = (S: StructureBuilder) =>
                       S.documentTypeListItem('release').title('All releases'),
                     ]),
                 ),
-              S.documentTypeListItem('track').title('Track library'),
               S.documentTypeListItem('link').title('Archive links'),
             ]),
         ),
