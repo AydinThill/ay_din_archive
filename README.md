@@ -4,6 +4,9 @@ A custom, 3D link-in-bio experience for music releases. The frontend and CMS fol
 same core stack as the Pistrino-Steffen Gallery website, with TypeScript added for safer
 content and scene contracts.
 
+The planned public URL is `https://aydin.quest/linktree/`. “Linktree” is a temporary route
+name and not the final product name.
+
 ## Stack
 
 - Vite 8, React 19, and TypeScript
@@ -24,6 +27,10 @@ npm run dev:web
 
 The web app runs at `http://localhost:5173`. Until Sanity is configured it intentionally
 uses local demo content, so the 3D scene can be developed immediately.
+
+Production builds use `/linktree/` as their asset base through `.env.production`. To rename
+the route later, change `VITE_BASE_PATH` in the deployment environment and update the
+canonical URL in `index.html`. Local development remains at `/` by default.
 
 ## Connect the CMS
 
@@ -58,6 +65,13 @@ npm run build:studio  # build Sanity Studio
 npm run lint
 npm run format:check
 ```
+
+## Hosting under a subpath
+
+The generated frontend is ready to be served from `/linktree/`, including its JavaScript
+and CSS asset URLs. The host for the main `aydin.quest` website must route requests for
+`/linktree/*` to this project's built `index.html`. The exact rewrite belongs in the hosting
+configuration once the provider for the main website is chosen.
 
 ## Suggested next phase
 
