@@ -19,7 +19,7 @@ function App() {
     <main className="experience-shell">
       <header className="site-header">
         <a href="#top" className="wordmark">
-          {content.settings?.name || 'Spatial Links'}
+          {content.settings?.name || 'Ay Din Archive'}
         </a>
         <span>{content.settings?.tagline}</span>
       </header>

@@ -5,8 +5,8 @@ import {schemaTypes} from './src/sanity/schemas'
 import {structure} from './src/sanity/structure'
 
 export default defineConfig({
-  name: 'spatial_links',
-  title: 'Spatial Links',
+  name: 'ay_din_archive',
+  title: 'Ay Din Archive',
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'your-project-id',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',
   basePath: '/studio',

@@ -5,5 +5,5 @@ export default defineCliConfig({
     projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'your-project-id',
     dataset: process.env.SANITY_STUDIO_DATASET || 'production',
   },
-  studioHost: 'spatial-links',
+  studioHost: 'ay-din-archive',
 })

@@ -7,28 +7,38 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/linktree/",
+      "destination": "/archive/",
       "permanent": false
     },
     {
       "source": "/linktree",
-      "destination": "/linktree/",
+      "destination": "/archive/",
+      "permanent": true
+    },
+    {
+      "source": "/linktree/:path*",
+      "destination": "/archive/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/archive",
+      "destination": "/archive/",
       "permanent": true
     }
   ],
   "rewrites": [
     {
-      "source": "/linktree/assets/:path*",
+      "source": "/archive/assets/:path*",
       "destination": "/assets/:path*"
     },
     {
-      "source": "/linktree/:path*",
+      "source": "/archive/:path*",
       "destination": "/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/linktree/assets/:path*",
+      "source": "/archive/assets/:path*",
       "headers": [
         {
           "key": "Cache-Control",

@@ -1,11 +1,10 @@
-# Spatial Links
+# Ay Din Archive
 
-A custom, 3D link-in-bio experience for music releases. The frontend and CMS follow the
-same core stack as the Pistrino-Steffen Gallery website, with TypeScript added for safer
-content and scene contracts.
+A custom, 3D archive for Ay Din music, releases, transmissions, and artifacts. The frontend
+and CMS follow the same core stack as the Pistrino-Steffen Gallery website, with TypeScript
+added for safer content and scene contracts.
 
-The planned public URL is `https://aydin.quest/linktree/`. “Linktree” is a temporary route
-name and not the final product name.
+The planned public URL is `https://aydin.quest/archive/`.
 
 ## Stack
 
@@ -28,7 +27,7 @@ npm run dev:web
 The web app runs at `http://localhost:5173`. Until Sanity is configured it intentionally
 uses local demo content, so the 3D scene can be developed immediately.
 
-Production builds use `/linktree/` as their asset base through `.env.production`. To rename
+Production builds use `/archive/` as their asset base through `.env.production`. To rename
 the route later, change `VITE_BASE_PATH` in the deployment environment and update the
 canonical URL in `index.html`. Local development remains at `/` by default.
 
@@ -68,7 +67,7 @@ npm run format:check
 
 ## Hosting under a subpath
 
-The generated frontend is ready to be served from `/linktree/`, including its JavaScript
+The generated frontend is ready to be served from `/archive/`, including its JavaScript
 and CSS asset URLs. `vercel.json` maps those public URLs to the files in Vite's `dist`
 directory and sends application routes to `index.html`.
 
@@ -79,17 +78,19 @@ directory and sends application routes to `index.html`.
    **Vite** framework settings. The build and output settings are already versioned in
    `vercel.json`.
 3. Add the Sanity variables from `.env.example` under **Project → Settings → Environment
-   Variables** when the CMS project exists. `VITE_BASE_PATH=/linktree/` is already supplied
+   Variables** when the CMS project exists. `VITE_BASE_PATH=/archive/` is already supplied
    by `.env.production`.
-4. Deploy once and test the generated `*.vercel.app/linktree/` URL.
+4. Deploy once and test the generated `*.vercel.app/archive/` URL.
 5. Under **Project → Settings → Domains**, add `aydin.quest` and optionally
    `www.aydin.quest`.
 6. At the domain registrar, create the exact DNS records Vercel shows. For an apex domain,
    this is normally an A record; `www` normally uses a CNAME. Prefer the values displayed
    by Vercel for this project over copied generic values.
 
-The root `/` redirect to `/linktree/` is intentionally temporary. Remove the first entry
+The root `/` redirect to `/archive/` is intentionally temporary. Remove the first entry
 under `redirects` in `vercel.json` when the main `aydin.quest` homepage is ready.
+
+Requests to the former `/linktree` path permanently redirect to `/archive/`.
 
 ## Suggested next phase
 
