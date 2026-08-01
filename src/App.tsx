@@ -1,4 +1,5 @@
 import {lazy, Suspense, useEffect, useState} from 'react'
+import {ReleaseArchive} from './components/ReleaseArchive'
 import {fallbackContent, getHomeContent} from './sanity/content'
 import {isSanityConfigured} from './sanity/client'
 import type {HomeContent} from './types/content'
@@ -16,7 +17,7 @@ function App() {
   }, [])
 
   return (
-    <main className="experience-shell">
+    <main className="experience-shell" id="top">
       <header className="site-header">
         <a href="#top" className="wordmark">
           {content.settings?.name || 'Ay Din Archive'}
@@ -24,14 +25,18 @@ function App() {
         <span>{content.settings?.tagline}</span>
       </header>
 
-      <section className="scene" id="top" aria-label="Interactive links">
-        <Suspense fallback={<div className="loading">Loading space…</div>}>
-          <Experience links={content.links} />
-        </Suspense>
-      </section>
+      {content.links.length > 0 ? (
+        <section className="scene" aria-label="Interactive links">
+          <Suspense fallback={<div className="loading">Loading space…</div>}>
+            <Experience links={content.links} />
+          </Suspense>
+        </section>
+      ) : null}
+
+      <ReleaseArchive releases={content.releases} />
 
       <footer className="site-footer">
-        <p>Drag the idea further. This is the 3D foundation.</p>
+        <p>Ay Din · Independent music archive</p>
         {!isSanityConfigured && (
           <p className="setup-note">
             Demo content · connect a new Sanity project in <code>.env</code>

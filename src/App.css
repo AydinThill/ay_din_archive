@@ -1,8 +1,6 @@
 .experience-shell {
   min-height: 100svh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .site-header,
@@ -37,7 +35,7 @@
 
 .scene {
   position: relative;
-  min-height: 0;
+  height: clamp(34rem, 76svh, 54rem);
 }
 
 .scene canvas {
@@ -109,6 +107,171 @@
   margin: 0;
 }
 
+.release-archive {
+  position: relative;
+  z-index: 2;
+  padding: clamp(4rem, 9vw, 8rem) 1.6rem clamp(5rem, 10vw, 9rem);
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  background:
+    linear-gradient(rgb(255 255 255 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 3%) 1px, transparent 1px), #090a0d;
+  background-size: 48px 48px;
+}
+
+.release-heading-row {
+  width: min(100%, 1160px);
+  margin: 0 auto clamp(2.5rem, 6vw, 5rem);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.section-index,
+.release-count,
+.release-meta,
+.links-pending {
+  margin: 0;
+  color: #898b91;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.release-heading-row h2 {
+  margin: 0.55rem 0 0;
+  font-size: clamp(2.8rem, 8vw, 7rem);
+  font-weight: 520;
+  letter-spacing: -0.065em;
+  line-height: 0.85;
+}
+
+.release-grid {
+  width: min(100%, 1160px);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(4rem, 8vw, 7rem);
+}
+
+.release-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: center;
+}
+
+.release-card:nth-child(even) .release-artwork {
+  order: 2;
+}
+
+.release-artwork {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 16%);
+  background: #111217;
+  box-shadow: 0 2rem 6rem rgb(0 0 0 / 45%);
+}
+
+.release-artwork img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.artwork-placeholder {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #3b3d43;
+  font-size: clamp(2rem, 8vw, 6rem);
+  letter-spacing: -0.08em;
+}
+
+.release-number {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  color: #090a0d;
+  background: #f5f5f1;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.release-meta {
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgb(255 255 255 / 16%);
+}
+
+.release-information h3 {
+  margin: 1.5rem 0 0;
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+  font-weight: 540;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+.release-artist {
+  margin: 0.7rem 0 0;
+  color: #b6b8be;
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.release-description {
+  max-width: 46ch;
+  margin: 2rem 0 0;
+  color: #b6b8be;
+  font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.streaming-links {
+  margin-top: 2.4rem;
+  border-top: 1px solid rgb(255 255 255 / 16%);
+}
+
+.streaming-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgb(255 255 255 / 16%);
+  color: #f5f5f1;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    color 180ms ease,
+    padding 180ms ease;
+}
+
+.streaming-links a:hover,
+.streaming-links a:focus-visible {
+  padding-left: 0.65rem;
+  color: #d8ff65;
+}
+
+.streaming-links a:focus-visible {
+  outline: 1px solid #d8ff65;
+  outline-offset: 3px;
+}
+
+.links-pending {
+  margin-top: 2.4rem;
+}
+
 .setup-note code {
   color: #d8ff65;
   font-family: inherit;
@@ -125,10 +288,27 @@
   .scene-link {
     width: 205px;
   }
+
+  .scene {
+    height: 34rem;
+  }
+
+  .release-heading-row {
+    align-items: flex-start;
+  }
+
+  .release-card {
+    grid-template-columns: 1fr;
+  }
+
+  .release-card:nth-child(even) .release-artwork {
+    order: initial;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scene-link i {
+  .scene-link i,
+  .streaming-links a {
     transition: none;
   }
 }
