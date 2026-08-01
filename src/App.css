@@ -461,17 +461,6 @@
   background: #d8ff65;
 }
 
-.score-disclaimer {
-  margin: 1.2rem 0 0;
-  padding-top: 0.9rem;
-  border-top: 1px solid rgb(255 255 255 / 10%);
-  color: #777a81;
-  font-size: 0.62rem;
-  letter-spacing: 0.055em;
-  line-height: 1.55;
-  text-transform: uppercase;
-}
-
 .platform-open {
   margin-top: 1.5rem;
   display: flex;

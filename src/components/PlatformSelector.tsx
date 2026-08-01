@@ -52,9 +52,9 @@ const platforms: Platform[] = [
 ]
 
 const scoreLabels: Record<ScoreKey, string> = {
-  popularity: 'Service reach',
-  ux: 'App experience',
-  morality: 'Artist fairness',
+  popularity: 'Network reach',
+  ux: 'Interface',
+  morality: 'Artist treatment',
 }
 
 function interpolateScore(key: ScoreKey, position: number) {
@@ -137,8 +137,8 @@ export function PlatformSelector({release}: {release: Release}) {
   return (
     <div className="platform-selector">
       <div className="platform-context">
-        <p>Listening service guide</p>
-        <span>Compare the platforms themselves—not this release’s performance.</span>
+        <p>Ay Din field notes</p>
+        <span>Transmission routes / 06</span>
       </div>
 
       <div className="platform-logos" role="group" aria-label="Choose a streaming platform">
@@ -194,10 +194,13 @@ export function PlatformSelector({release}: {release: Release}) {
       <div className="platform-readout">
         <div className="platform-readout-heading">
           <div>
-            <p>General service profile</p>
+            <p>
+              Network {String(selectedIndex + 1).padStart(2, '0')} /{' '}
+              {String(platforms.length).padStart(2, '0')}
+            </p>
             <h4>{selectedPlatform.name}</h4>
           </div>
-          <span>Ay Din editorial rating</span>
+          <span>Platform profile</span>
         </div>
 
         <dl className="platform-scores">
@@ -219,18 +222,13 @@ export function PlatformSelector({release}: {release: Release}) {
           })}
         </dl>
 
-        <p className="score-disclaimer">
-          About {selectedPlatform.name} as a platform. Not plays, listener data or analytics for{' '}
-          {release.title}.
-        </p>
-
         {selectedUrl ? (
           <a className="platform-open" href={selectedUrl} target="_blank" rel="noreferrer">
-            <span>Open on {selectedPlatform.name}</span>
+            <span>Continue to {selectedPlatform.name}</span>
             <span aria-hidden="true">↗</span>
           </a>
         ) : (
-          <span className="platform-open is-unavailable">No link available yet</span>
+          <span className="platform-open is-unavailable">Route currently dormant</span>
         )}
       </div>
     </div>
