@@ -1,14 +1,5 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-const streamingServices = [
-  {title: 'Bandcamp', value: 'bandcamp'},
-  {title: 'Spotify', value: 'spotify'},
-  {title: 'Apple Music', value: 'appleMusic'},
-  {title: 'SoundCloud', value: 'soundcloud'},
-  {title: 'YouTube', value: 'youtube'},
-  {title: 'Other', value: 'other'},
-]
-
 export const release = defineType({
   name: 'release',
   title: 'Release',
@@ -53,7 +44,6 @@ export const release = defineType({
           {title: 'Single', value: 'single'},
           {title: 'EP', value: 'ep'},
           {title: 'Album', value: 'album'},
-          {title: 'Mix', value: 'mix'},
         ],
       },
       validation: (rule) => rule.required(),
@@ -109,38 +99,46 @@ export const release = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'streamingLinks',
-      title: 'Listen / buy links',
-      type: 'array',
+      name: 'spotifyUrl',
+      title: 'Spotify URL',
+      type: 'url',
       group: 'links',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'streamingLink',
-          fields: [
-            defineField({
-              name: 'service',
-              title: 'Service',
-              type: 'string',
-              options: {list: streamingServices},
-              validation: (rule) => rule.required(),
-            }),
-            defineField({
-              name: 'label',
-              title: 'Custom label',
-              description: 'Useful when the service is “Other”.',
-              type: 'string',
-            }),
-            defineField({
-              name: 'url',
-              title: 'URL',
-              type: 'url',
-              validation: (rule) => rule.required().uri({scheme: ['http', 'https']}),
-            }),
-          ],
-          preview: {select: {title: 'service', subtitle: 'url'}},
-        }),
-      ],
+      validation: (rule) => rule.uri({scheme: ['http', 'https']}),
+    }),
+    defineField({
+      name: 'appleMusicUrl',
+      title: 'Apple Music URL',
+      type: 'url',
+      group: 'links',
+      validation: (rule) => rule.uri({scheme: ['http', 'https']}),
+    }),
+    defineField({
+      name: 'bandcampUrl',
+      title: 'Bandcamp URL',
+      type: 'url',
+      group: 'links',
+      validation: (rule) => rule.uri({scheme: ['http', 'https']}),
+    }),
+    defineField({
+      name: 'soundcloudUrl',
+      title: 'SoundCloud URL',
+      type: 'url',
+      group: 'links',
+      validation: (rule) => rule.uri({scheme: ['http', 'https']}),
+    }),
+    defineField({
+      name: 'deezerUrl',
+      title: 'Deezer URL',
+      type: 'url',
+      group: 'links',
+      validation: (rule) => rule.uri({scheme: ['http', 'https']}),
+    }),
+    defineField({
+      name: 'tidalUrl',
+      title: 'Tidal URL',
+      type: 'url',
+      group: 'links',
+      validation: (rule) => rule.uri({scheme: ['http', 'https']}),
     }),
   ],
   orderings: [

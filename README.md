@@ -49,7 +49,8 @@ areas. Releases, tracks, and Archive-specific links remain inside the Archive ar
 ### Content model
 
 - **Track** stores uploaded audio, metadata, duration, and credits.
-- **Release** groups one or more tracks with artwork, streaming links, and a release time.
+- **Release** groups one or more tracks with artwork, an optional description, a release time,
+  and fixed URL fields for Spotify, Apple Music, Bandcamp, SoundCloud, Deezer, and Tidal.
 - **Link** drives the spatial link objects and their accent colors.
 - **Site settings** is a singleton for the artist name, tagline, bio, and contact details.
 

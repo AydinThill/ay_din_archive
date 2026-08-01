@@ -18,12 +18,13 @@ export type Release = {
   _id: string
   title: string
   artist: string
-  releaseType: 'single' | 'ep' | 'album' | 'mix'
+  releaseType: 'single' | 'ep' | 'album'
   releaseAt: string
   slug: string
   coverUrl?: string
+  description?: string
   tracks: Track[]
-  streamingLinks?: {service: string; label?: string; url: string}[]
+  streamingLinks?: {service: string; url: string}[]
 }
 
 export type HomeContent = {

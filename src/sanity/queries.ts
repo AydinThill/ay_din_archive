@@ -11,9 +11,17 @@ export const homeQuery = `{
     artist,
     releaseType,
     releaseAt,
+    description,
     "slug": slug.current,
     "coverUrl": cover.asset->url,
-    streamingLinks[]{service, label, url},
+    "streamingLinks": [
+      {"service": "spotify", "url": spotifyUrl},
+      {"service": "appleMusic", "url": appleMusicUrl},
+      {"service": "bandcamp", "url": bandcampUrl},
+      {"service": "soundcloud", "url": soundcloudUrl},
+      {"service": "deezer", "url": deezerUrl},
+      {"service": "tidal", "url": tidalUrl}
+    ][defined(url)],
     tracks[]->{_id, title, version, durationSeconds, "audioUrl": audio.asset->url}
   }
 }`
