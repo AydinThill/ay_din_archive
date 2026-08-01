@@ -40,7 +40,11 @@ canonical URL in `index.html`. Local development remains at `/` by default.
 4. Add `http://localhost:5173` as a CORS origin in the Sanity project settings.
 5. Start both apps with `npm run dev`.
 
-The frontend runs at `http://localhost:5173`; Studio runs at `http://localhost:3333/studio`.
+The frontend runs at `http://localhost:5173`; Studio runs at `http://localhost:3333/admin`.
+
+In production, the authenticated Studio is available at `https://aydin.quest/admin/`. It is
+the CMS for the entire domain, organized into top-level **Main website** and **Archive**
+areas. Releases, tracks, and Archive-specific links remain inside the Archive area.
 
 ### Content model
 
@@ -59,7 +63,8 @@ unpublished Sanity draft when it should not be available through the published A
 npm run dev           # frontend and Studio together
 npm run dev:web       # frontend only
 npm run dev:studio    # Studio only
-npm run build         # typecheck and build the frontend
+npm run build         # build the frontend and embedded /admin Studio
+npm run build:web     # typecheck and build only the frontend
 npm run build:studio  # build Sanity Studio
 npm run lint
 npm run format:check

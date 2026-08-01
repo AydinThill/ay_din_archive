@@ -1,5 +1,5 @@
 export const homeQuery = `{
-  "settings": *[_type == "siteSettings"][0]{name, tagline, bio, contactEmail},
+  "settings": *[_type == "archiveSettings"][0]{name, tagline, bio, contactEmail},
   "links": *[_type == "link" && isVisible == true] | order(order asc){_id, title, eyebrow, url, accent},
   "releases": *[
     _type == "release" &&

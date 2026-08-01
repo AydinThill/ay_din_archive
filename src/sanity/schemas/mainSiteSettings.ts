@@ -1,20 +1,21 @@
 import {defineField, defineType} from 'sanity'
 
-export const siteSettings = defineType({
-  name: 'siteSettings',
-  title: 'Site settings',
+export const mainSiteSettings = defineType({
+  name: 'mainSiteSettings',
+  title: 'Main website settings',
   type: 'document',
   fields: [
     defineField({
-      name: 'name',
-      title: 'Artist / project name',
+      name: 'title',
+      title: 'Website title',
       type: 'string',
+      initialValue: 'Ay Din',
       validation: (rule) => rule.required(),
     }),
     defineField({name: 'tagline', title: 'Tagline', type: 'string'}),
-    defineField({name: 'bio', title: 'Short bio', type: 'text', rows: 4}),
+    defineField({name: 'introduction', title: 'Introduction', type: 'text', rows: 5}),
     defineField({name: 'portrait', title: 'Portrait', type: 'image', options: {hotspot: true}}),
     defineField({name: 'contactEmail', title: 'Contact email', type: 'email'}),
   ],
-  preview: {prepare: () => ({title: 'Site settings'})},
+  preview: {prepare: () => ({title: 'Main website settings'})},
 })

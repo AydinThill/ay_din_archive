@@ -7,44 +7,70 @@ const releases = (S: StructureBuilder, title: string, filter: string) =>
     .filter(filter)
     .defaultOrdering([{field: 'releaseAt', direction: 'desc'}])
 
+const singleton = (S: StructureBuilder, title: string, schemaType: string, documentId: string) =>
+  S.listItem()
+    .title(title)
+    .schemaType(schemaType)
+    .child(S.document().title(title).schemaType(schemaType).documentId(documentId))
+
 export const structure = (S: StructureBuilder) =>
   S.list()
-    .title('Content')
+    .title('Ay Din CMS')
     .items([
       S.listItem()
-        .title('Site settings')
-        .schemaType('siteSettings')
-        .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
-      S.divider(),
-      S.listItem()
-        .title('Releases')
-        .schemaType('release')
+        .title('Main website')
         .child(
           S.list()
-            .title('Releases')
+            .title('Main website')
+            .items([singleton(S, 'Website settings', 'mainSiteSettings', 'mainSiteSettings')]),
+        ),
+      S.listItem()
+        .title('Archive')
+        .child(
+          S.list()
+            .title('Archive')
             .items([
+              singleton(S, 'Archive settings', 'archiveSettings', 'archiveSettings'),
+              S.divider(),
               S.listItem()
-                .title('Scheduled')
+                .title('Releases')
+                .schemaType('release')
                 .child(
-                  releases(
-                    S,
-                    'Scheduled releases',
-                    '_type == "release" && visibility == "scheduled"',
-                  ),
+                  S.list()
+                    .title('Releases')
+                    .items([
+                      S.listItem()
+                        .title('Scheduled')
+                        .child(
+                          releases(
+                            S,
+                            'Scheduled releases',
+                            '_type == "release" && visibility == "scheduled"',
+                          ),
+                        ),
+                      S.listItem()
+                        .title('Public')
+                        .child(
+                          releases(
+                            S,
+                            'Public releases',
+                            '_type == "release" && visibility == "public"',
+                          ),
+                        ),
+                      S.listItem()
+                        .title('Hidden')
+                        .child(
+                          releases(
+                            S,
+                            'Hidden releases',
+                            '_type == "release" && visibility == "hidden"',
+                          ),
+                        ),
+                      S.documentTypeListItem('release').title('All releases'),
+                    ]),
                 ),
-              S.listItem()
-                .title('Public')
-                .child(
-                  releases(S, 'Public releases', '_type == "release" && visibility == "public"'),
-                ),
-              S.listItem()
-                .title('Hidden')
-                .child(
-                  releases(S, 'Hidden releases', '_type == "release" && visibility == "hidden"'),
-                ),
-              S.documentTypeListItem('release').title('All releases'),
+              S.documentTypeListItem('track').title('Track library'),
+              S.documentTypeListItem('link').title('Archive links'),
             ]),
         ),
-      S.documentTypeListItem('track').title('Track library'),
-      S.documentTypeListItem('link').title('Links'),
     ])

@@ -29,9 +29,26 @@
       "source": "/archive",
       "destination": "/archive/",
       "permanent": true
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin/",
+      "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/static/:path*",
+      "destination": "/admin/static/:path*"
+    },
+    {
+      "source": "/admin/",
+      "destination": "/admin/index.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/admin/index.html"
+    },
     {
       "source": "/archive/",
       "destination": "/index.html"

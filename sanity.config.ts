@@ -5,11 +5,18 @@ import {schemaTypes} from './src/sanity/schemas'
 import {structure} from './src/sanity/structure'
 
 export default defineConfig({
-  name: 'ay_din_archive',
-  title: 'Ay Din Archive',
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'your-project-id',
-  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
-  basePath: '/studio',
+  name: 'ay_din',
+  title: 'Ay Din',
+  projectId:
+    process.env.SANITY_STUDIO_PROJECT_ID || process.env.VITE_SANITY_PROJECT_ID || 'your-project-id',
+  dataset: process.env.SANITY_STUDIO_DATASET || process.env.VITE_SANITY_DATASET || 'production',
+  basePath: '/admin',
   plugins: [structureTool({structure}), visionTool()],
-  schema: {types: schemaTypes},
+  schema: {
+    types: schemaTypes,
+    templates: (templates) =>
+      templates.filter(
+        ({schemaType}) => !['mainSiteSettings', 'archiveSettings'].includes(schemaType),
+      ),
+  },
 })
