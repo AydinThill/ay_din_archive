@@ -1,0 +1,134 @@
+.experience-shell {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+}
+
+.site-header,
+.site-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.4rem 1.6rem;
+}
+
+.site-header {
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+}
+
+.wordmark {
+  color: #f5f5f1;
+  font-weight: 670;
+  letter-spacing: -0.025em;
+  text-decoration: none;
+}
+
+.site-header span,
+.site-footer {
+  color: #898b91;
+  font-size: 0.74rem;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.scene {
+  position: relative;
+  min-height: 0;
+}
+
+.scene canvas {
+  position: absolute !important;
+  inset: 0;
+}
+
+.loading {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #898b91;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.scene-link {
+  box-sizing: border-box;
+  width: 230px;
+  height: 118px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr auto;
+  padding: 21px 22px;
+  color: #f5f5f1;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.scene-link span {
+  grid-column: 1 / -1;
+  color: #8f9299;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.scene-link strong {
+  align-self: end;
+  font-size: 20px;
+  letter-spacing: -0.025em;
+}
+
+.scene-link i {
+  align-self: end;
+  color: #8f9299;
+  font-size: 17px;
+  font-style: normal;
+  transition: transform 180ms ease;
+}
+
+.scene-link:hover i,
+.scene-link:focus-visible i {
+  transform: translate(3px, -3px);
+}
+
+.scene-link:focus-visible {
+  outline: 2px solid #f5f5f1;
+  outline-offset: -5px;
+}
+
+.site-footer {
+  border-top: 1px solid rgb(255 255 255 / 12%);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.setup-note code {
+  color: #d8ff65;
+  font-family: inherit;
+}
+
+@media (max-width: 620px) {
+  .site-header,
+  .site-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .scene-link {
+    width: 205px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-link i {
+    transition: none;
+  }
+}
